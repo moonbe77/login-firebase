@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { auth } from '../firebase';
 import * as routes from '../constants/routes';
+import {Field, Label, Control, Input, Button} from 'bloomer';
 
 const SignUpPage = ({ history }) =>
   <div>
@@ -63,35 +64,57 @@ class SignUpForm extends Component {
       email === '' ||
       username === '';
 
-    return (
+    return (      
       <form onSubmit={this.onSubmit}>
-        <input
+      <Field>
+        <Label></Label>
+        <Input
           value={username}
           onChange={event => this.setState(byPropKey('username', event.target.value))}
           type="text"
           placeholder="Full Name"
         />
-        <input
+        <Control>
+        </Control>
+      </Field>
+      <Field>
+        <Label></Label>
+        <Input
           value={email}
           onChange={event => this.setState(byPropKey('email', event.target.value))}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <Control>
+        </Control>
+      </Field>
+      <Field>
+        <Label></Label>
+         <Input
           value={passwordOne}
           onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
           type="password"
           placeholder="Password"
         />
-        <input
+        <Control>
+        </Control>
+      </Field>
+      <Field>
+        <Label></Label>
+        <Input
           value={passwordTwo}
           onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
           type="password"
           placeholder="Confirm Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <Control>
+        </Control>
+      </Field>
+       
+        
+        <Button disabled={isInvalid} type="submit" isColor='primary'>
           Sign Up
-        </button>
+        </Button>
 
         { error && <p>{error.message}</p> }
       </form>

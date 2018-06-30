@@ -1,13 +1,14 @@
 import React from 'react';
-
 import { auth } from '../firebase';
+import { Icon, Button } from 'bloomer';
 
 const SignOutButton = () =>
-  <button
-    type="button"
-    onClick={auth.doSignOut}
-  >
+
+  <Button
+        onClick={auth.doSignOut}
+      >
+    <Icon className='fa fa-sign-out-alt' />
     Sign Out
-  </button>
+  </Button>
 
 export default SignOutButton;

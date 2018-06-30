@@ -14,6 +14,7 @@ import AccountPage from './Account';
 
 import * as routes from '../constants/routes';
 import { firebase } from '../firebase';
+import { Container} from 'bloomer';
 
 class App extends Component {
   constructor(props){
@@ -34,6 +35,7 @@ class App extends Component {
 
   render(){
     return(
+      <Container>
       <Router>
     <div>
       <Navigation authUser={this.state.authUser}/>
@@ -66,6 +68,7 @@ class App extends Component {
       />
     </div>
   </Router>
+  </Container>
     )
   }
 }
