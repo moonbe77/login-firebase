@@ -6,16 +6,16 @@ import SignOutButton from './SignOut';
 const Navigation = ({ authUser }) =>
   <div>
     {authUser
-      ? <NavigationAuth /> 
+      ? <NavigationAuth user={authUser}/> 
       : <NavigationNonAuth />
       }
   </div>
   
-  const NavigationAuth = () =>
+  const NavigationAuth = ({user}) =>
     <ul>
       <li><Link to={routes.LANDING}>Landing</Link></li>
       <li><Link to={routes.HOME}>Home</Link></li>
-      <li><Link to={routes.ACCOUNT}>Account</Link></li>
+      <li><Link to={routes.ACCOUNT} title={user.email}>Account</Link></li>
       <li><SignOutButton /></li>
     </ul>
 

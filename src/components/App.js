@@ -24,7 +24,8 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    firebase.auth.onAuthStateChanged(authUser => {
+    firebase.auth.onAuthStateChanged(authUser => {      
+      console.log(authUser)
       authUser
         ? this.setState(() =>({authUser}))
         : this.setState(() =>({authUser : null }))  

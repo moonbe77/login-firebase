@@ -40,7 +40,6 @@ class SignUpForm extends Component {
       .then(authUser => {
         this.setState(() => ({ ...INITIAL_STATE }));
         history.push( routes.HOME )
-        console.log(authUser)
       })
       .catch(error => {
         this.setState(byPropKey('error', error));

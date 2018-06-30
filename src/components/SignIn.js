@@ -43,8 +43,6 @@ class SignInForm extends Component {
       .then((user) => {
         this.setState(() => ({ ...INITIAL_STATE }));
         history.push(routes.HOME);
-        console.log(user.user.uid)
-        console.log(user.user.email)
       })
       .catch(error => {
         this.setState(byPropKey('error', error));
