@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
 import { SignUpLink } from './SignUp';
 import { auth } from '../firebase';
 import * as routes from '../constants/routes';
-import {Field, Label, Control, Input, Button} from 'bloomer';
+import { Field, Label, Control, Input, Button, Columns, Column } from 'bloomer';
+import { Box } from '../../node_modules/bloomer/lib/elements/Box';
 
 const SignInPage = ({ history }) =>
-  <div>
-    <h1>SignIn</h1>
-    <SignInForm history={history} />
-    <SignUpLink />
+  <div>    
+    <Columns>
+      <Column isSize='1/3' isOffset='1/3'>
+        <h1>SignIn Page</h1>
+        <Box>
+          <SignInForm history={history} />
+        </Box>
+          <SignUpLink />
+      </Column>
+    </Columns>
   </div>
 
 const byPropKey = (propertyName, value) => () => ({
@@ -63,40 +69,35 @@ class SignInForm extends Component {
       password === '' ||
       email === '';
 
-    return (
-      <form onSubmit={this.onSubmit}>      
-      <Field>
-        <Field>
-          <Label isSize='large'>Email </Label>
-          <Control>
-            <Input
-              type="text"
-              value={email}
-              onChange={event => this.setState(byPropKey('email', event.target.value))}
-              placeholder="Email Address"
-            />
-          </Control>
-        </Field>
-        <Field>
-          <Label isSize='large'>Pass </Label>
-          <Control>
-            <Input
-              value={password}
-              onChange={event => this.setState(byPropKey('password', event.target.value))}
-              type="password"
-              placeholder="Password"
-            />
-          </Control>
-        </Field>
-      </Field>
-        
-        
-        <Button disabled={isInvalid} type="submit">
-          Sign In
-        </Button>
-
-        { error && <p>{error.message}</p> }
-      </form>
+    return (      
+          <form onSubmit={this.onSubmit}>      
+            <Field>
+              <Label isSize='small'>Email </Label>
+              <Control>
+                <Input
+                  type="text"
+                  value={email}
+                  onChange={event => this.setState(byPropKey('email', event.target.value))}
+                  placeholder="Email Address"
+                  />
+              </Control>
+            </Field>
+            <Field>
+              <Label isSize='small'>Pass </Label>
+              <Control>
+                <Input
+                  value={password}
+                  onChange={event => this.setState(byPropKey('password', event.target.value))}
+                  type="password"
+                  placeholder="Password"
+                  />
+              </Control>
+            </Field>
+              <Button disabled={isInvalid} type="submit">
+                Sign In
+              </Button>
+              { error && <p>{error.message}</p> }
+          </form>        
     );
   }
 }

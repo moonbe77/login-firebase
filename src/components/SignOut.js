@@ -4,11 +4,9 @@ import { Icon, Button } from 'bloomer';
 
 const SignOutButton = () =>
 
-  <Button
-        onClick={auth.doSignOut}
-      >
+  <Button onClick={auth.doSignOut}>
     <Icon className='fa fa-sign-out-alt' />
-    Sign Out
+      Sign Out
   </Button>
 
 export default SignOutButton;

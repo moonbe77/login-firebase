@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { auth } from '../firebase';
 import * as routes from '../constants/routes';
-import {Field, Label, Control, Input, Button} from 'bloomer';
+import {Field, Label, Control, Input, Button, Columns, Column, Notification} from 'bloomer';
+import { Box } from '../../node_modules/bloomer/lib/elements/Box';
 
 const SignUpPage = ({ history }) =>
   <div>
-    <h1>SignUp</h1>
-    <SignUpForm history={ history }/>
+    <Columns>
+      <Column isSize='1/3' isOffset='1/3'>
+        <h1>SignUp</h1>
+        <Box>
+          <SignUpForm history={ history }/>
+        </Box>
+      </Column>
+    </Columns>
   </div>
 
 const INITIAL_STATE = {
@@ -109,14 +116,14 @@ class SignUpForm extends Component {
         />
         <Control>
         </Control>
-      </Field>
-       
+      </Field>      
         
         <Button disabled={isInvalid} type="submit" isColor='primary'>
           Sign Up
         </Button>
-
-        { error && <p>{error.message}</p> }
+        
+          { error && <Notification>{error.message}</Notification> }
+        
       </form>
     );
   }
