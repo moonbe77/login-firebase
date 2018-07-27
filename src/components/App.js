@@ -13,32 +13,16 @@ import HomePage from './Home';
 import AccountPage from './Account';
 
 import * as routes from '../constants/routes';
-import { firebase } from '../firebase';
+import withAuthentication from './withAuthentication'
 import { Container} from 'bloomer';
 
-class App extends Component {
-  constructor(props){
-    super(props);
 
-    this.state = {
-      authUser: null,
-    }
-  }
-  componentDidMount(){
-    firebase.auth.onAuthStateChanged(authUser => {      
-      console.log(authUser)
-      authUser
-        ? this.setState(() =>({authUser}))
-        : this.setState(() =>({authUser : null }))  
-    })  
-  }
 
-  render(){
-    return(
-      <Container>
+const App = () =>
+    <Container>
       <Router>
     <div>
-      <Navigation authUser={this.state.authUser}/>
+      <Navigation/>
 
       <hr/>
 
@@ -67,11 +51,7 @@ class App extends Component {
         component={() => <AccountPage />}
       />
     </div>
-  </Router>
-  </Container>
-    )
-  }
-}
-  
+    </Router>
+  </Container>  
 
-export default App;
+export default withAuthentication(App);
