@@ -16,16 +16,12 @@ import * as routes from '../constants/routes';
 import withAuthentication from './withAuthentication'
 import { Container} from 'bloomer';
 
-
-
 const App = () =>
     <Container>
       <Router>
     <div>
       <Navigation/>
-
-      <hr/>
-
+        <hr/>
       <Route
         exact path={routes.LANDING}
         component={() => <LandingPage />}
