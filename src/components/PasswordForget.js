@@ -59,7 +59,7 @@ class PasswordForgetForm extends Component {
     return (      
           <form onSubmit={this.onSubmit}>      
             <Field>
-              <Label isSize='small'>Email </Label>
+              <Label isSize='small'>Recupera tu cuenta! </Label>
               <Control>
                 <Input
                   type="text"

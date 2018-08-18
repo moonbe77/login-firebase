@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as routes from '../constants/routes';
-import { PasswordForgetLink } from './PasswordForget';
+import { PasswordForgetForm } from './PasswordForget';
 import AuthUserContext from './AuthUserContext';
-import { Icon } from 'bloomer';
+import { Icon, Section, Columns, Column, Box, Title } from 'bloomer';
+import PasswordChangeForm from './PasswordChange';
 
-const LandingPage = ({ authUser }) =>        
+const AcountPage = ({ authUser }) =>        
     <AuthUserContext.Consumer>
         { authUser = authUser =>
           authUser 
@@ -19,10 +20,24 @@ const LandingPage = ({ authUser }) =>
 
 const DataUser = ({user}) =>
   <div>
-    <h1>Account Page</h1>
-    <p>{user.email}</p>
+    <Section>
+      <h1>Account: {user.email} </h1>
     <p>{user.uid}</p>
-    <PasswordForgetLink />
+    <Columns>
+        <Column isSize={1/2}>
+          <Box>
+            <Title isSize='4'>Recupera tu password</Title>  
+              <PasswordForgetForm />
+          </Box>
+        </Column>  
+        <Column isSize={1/2}>
+          <Box>
+            <Title isSize='4'>Cambia tu password</Title>
+            <PasswordChangeForm />
+          </Box>
+        </Column>
+    </Columns>
+    </Section>
   </div>
 
-export default LandingPage;
+export default AcountPage;
