@@ -1,8 +1,13 @@
 import React from 'react';
+import withAuthorization from './withAuthorization';
+import {Title} from 'bloomer';
 
-const LandingPage = () =>
+const HomePage = () =>
   <div>
-    <h1>Home Page</h1>
+    <Title isSize={1}>Home Page</Title>
+    <p>The Home Page is accessible by every signed in user.</p>
   </div>
 
-export default LandingPage;
+const authCondition = (authUser) => !!authUser;
+
+export default withAuthorization(authCondition)(HomePage);

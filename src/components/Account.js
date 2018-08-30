@@ -5,6 +5,7 @@ import { PasswordForgetForm } from './PasswordForget';
 import AuthUserContext from './AuthUserContext';
 import { Icon, Section, Columns, Column, Box, Title } from 'bloomer';
 import PasswordChangeForm from './PasswordChange';
+import withAuthorization from './withAuthorization';
 
 const AcountPage = ({ authUser }) =>        
     <AuthUserContext.Consumer>
@@ -33,11 +34,14 @@ const DataUser = ({user}) =>
         <Column isSize={1/2}>
           <Box>
             <Title isSize='4'>Cambia tu password</Title>
-            <PasswordChangeForm />
+            <PasswordChangeForm  data={user}/>
           </Box>
         </Column>
     </Columns>
     </Section>
   </div>
 
-export default AcountPage;
+  const authCondition = (authUser) => !!authUser
+    
+
+export default withAuthorization(authCondition)(AcountPage);

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../firebase';
 import { Field, Label, Control, Input, Button, Icon } from 'bloomer';
+import { Select } from 'bloomer/lib/elements/Form/Select';
+import { Radio } from 'bloomer/lib/elements/Form/Radio';
+import { Checkbox } from 'bloomer/lib/elements/Form/Checkbox';
 
-const byPropKey = (propertyName, value) => () => ({
-  [propertyName]: value,
-});
 
 const INITIAL_STATE = {
   passwordOne: '',
@@ -17,8 +17,20 @@ const INITIAL_STATE = {
 class PasswordChangeForm extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = { ...INITIAL_STATE };
+  }
+  
+  byPropKey = (propertyName, value) => () => ({
+    [propertyName]: value,
+  });
+
+  showPass = (e) => {
+    if(e.target.checked === true){
+      this.setState({type : 'text'})
+    }else{
+      this.setState({type : 'password'})
+    }
   }
 
   onSubmit = (event) => {
@@ -30,7 +42,7 @@ class PasswordChangeForm extends Component {
       this.setState(() => ({ ...INITIAL_STATE }));
     })
     .catch(error => {
-      this.setState(byPropKey('error', error));
+      this.setState(this.byPropKey('error', error));
     });
     
   }
@@ -49,6 +61,7 @@ class PasswordChangeForm extends Component {
     return (      
           <form onSubmit={this.onSubmit}>      
             <Field>
+              <input type="text" name="email" defaultValue={this.props.data.email} style={{'display':'none'}}/>
               <Label isSize='small'>New Password </Label>
               <Control hasIcons>
                 <Input
@@ -56,21 +69,23 @@ class PasswordChangeForm extends Component {
                   type={this.state.type}
                   value={passwordOne}
                   autoComplete="new-password"
-                  onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
+                  onChange={event => this.setState(this.byPropKey('passwordOne', event.target.value))}
                   placeholder="New password"
                   />
-                    <Icon isSize="small" isAlign="right"
-                    onFocus = {event => this.setState(byPropKey( 'type', 'text'))}
-                    onBlur = {event => this.setState(byPropKey( 'type', 'password'))} >
-                        <span className="fa fa-eye-slash" 
-                        ></span>
+                    <Icon  isAlign="right">
+                     {
+                       this.state.type === 'password' ?
+                       <span className="fa fa-eye-slash"></span>:
+                       <span className="fa fa-eye"></span>
+                     }
                     </Icon>
                   
-                    <Button 
-                      onFocus = {event => this.setState(byPropKey( 'type', 'text'))}
-                      onBlur = {event => this.setState(byPropKey( 'type', 'password'))}>
-                      </Button>
-              </Control>
+                    <Checkbox 
+                      name='showPassword'                   
+                      onClick = {this.showPass}>
+                      Show Password
+                      </Checkbox>
+              </Control> 
               <Label isSize="small">Confirm New Password </Label>
               <Control hasIcons>              
                 <Input
@@ -78,7 +93,7 @@ class PasswordChangeForm extends Component {
                     type="password"
                     value={passwordTwo}
                     autoComplete="new-password"
-                    onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
+                    onChange={event => this.setState(this.byPropKey('passwordTwo', event.target.value))}
                     placeholder="Confirm new password"
                     />
                     <Icon isSize="small" isAlign="right">
